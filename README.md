@@ -8,7 +8,18 @@
 - [x] Release training and testing code of DF_MVR;
 - [x] Release pretrained weight for pixel face dataset;
 - [ ] Release pretrained weight for custom data;
-#### Environment
+
+### Environment Update 11.02.2026
+- **Tested Environment:** RTX 4060 (Ada Lovelace) / CUDA 11.3 / Python 3.8.20 / **PyTorch 1.12.1**
+- **Key Fixes:**
+  - **Modern MMEngine Migration:** Updated code from `mmcv` to `mmengine` registry and runner for better stability.
+  - **CUDA Backport (sm_89 Patch):** Added a patch in `involution_cuda.py` to allow sm_89 (RTX 40 series) GPUs to run on CUDA 11.3 by forcing sm_86 PTX compatibility.
+  - **Single GPU Optimization:** Pre-configured for single-GPU setup via dynamic `--gpu` argument (default is `0`).
+  - **Dynamic GPU Selection:** Support for multi-GPU or specific card selection (e.g., `--gpu 0` or `--gpu 4,5`).
+  - **Extended Visuals:** Added `test_detail_vis.py` for comprehensive identity and detail visualization.
+  - **Usage:** Run with optional GPU selection (Default: 0): `python test_sample.py --gpu 0,1`
+
+#### Environment OLD
 RTX 3090 & RTX 2080 Ti  <br>
 For 3090: We recommend CUDA 11.1 & Python v3.8.10  & Pytorch 1.9.0 
     

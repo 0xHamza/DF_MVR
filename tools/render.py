@@ -60,7 +60,7 @@ class Renderer(nn.Module):
         )
         blend_params = BlendParams(1e-4, 1e-4, (0, 0, 0))
 
-        phong_shader = SoftPhongShader(
+        phong_shader = HardPhongShader( # old SoftPhongShader(), because new v11.02.2026 environment has some problem with soft shader
             lights=self.lights,
             cameras=self.cameras,
             materials=materials,

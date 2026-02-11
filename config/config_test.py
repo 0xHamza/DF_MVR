@@ -33,6 +33,7 @@ def get_parser():
                         help='select the number of train samples, none is all')
     parser.add_argument('--save_freq', type=int, default=1, help='Pre-training model saving frequency(epoch)')
     parser.add_argument('--validation', type=bool, default=True, help='Whether to verify the validation set')
+    parser.add_argument('--gpu', type=str, default='0', help='gpu id')
 
     # #Distributed training
     parser.add_argument('--local_rank', type=int, default=0, help='local rank for distributed training')
@@ -42,5 +43,5 @@ def get_parser():
     parser.add_argument('--sync_bn', type=bool, default=False, help='Whether to batch norm all gpu para')
     parser.add_argument('--tcp_port', type=int, default=18888, help='tcp port for Distributed training')
 
-    args = parser.parse_args()
+    args, unknown = parser.parse_known_args()
     return args

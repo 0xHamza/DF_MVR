@@ -329,8 +329,8 @@ if __name__ == '__main__':
     torch.cuda.manual_seed(22)
 
     # #INIT
-    os.environ['CUDA_VISIBLE_DEVICES'] = '4, 5'
     cfg = get_parser()
+    os.environ['CUDA_VISIBLE_DEVICES'] = cfg.gpu # old '4, 5'
     torch.backends.cudnn.benchmark = True
     torch.manual_seed(cfg.manual_seed)
 

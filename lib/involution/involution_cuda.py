@@ -10,6 +10,23 @@ from collections import namedtuple
 import cupy
 from string import Template
 
+# Backport: Force sm_86 arch for CUDA 11.3 nvrtc on Ada Lovelace (sm_89) GPUs.
+# CUDA 11.3 nvrtc does not recognize sm_89; sm_86 PTX is forward-compatible.
+_orig_get_arch = None
+try:
+    import cupy.cuda.compiler as _cupy_compiler
+    if hasattr(_cupy_compiler, '_get_arch'):
+        _orig_get_arch = _cupy_compiler._get_arch
+        def _patched_get_arch(*args, **kwargs):
+            arch = _orig_get_arch(*args, **kwargs)
+            # sm_89 and above not supported by CUDA 11.3 nvrtc, fallback to sm_86
+            if int(arch) > 86:
+                return '86'
+            return arch
+        _cupy_compiler._get_arch = _patched_get_arch
+except Exception:
+    pass
+
 
 Stream = namedtuple('Stream', ['ptr'])
 
