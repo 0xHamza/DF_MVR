@@ -46,7 +46,7 @@ if __name__ == '__main__':
     cfg = get_parser()
 
     # #INIT
-    os.environ['CUDA_VISIBLE_DEVICES'] = '5'
+    os.environ['CUDA_VISIBLE_DEVICES'] = cfg.gpu # old '5'
 
     # #normalized rgb to [-1, 1]
     transform = transforms.Compose([
